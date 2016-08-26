@@ -1,2 +1,2 @@
 # laravel-5.3-web-app
-Creacion de CRUD y Auth y migracion a Laravel 5.3
+Creacion de CRUD, Auth y test de Laravel 5.3
