@@ -73,4 +73,13 @@ class HomeController extends Controller
         return Redirect::to('login');
     }
 
+    public function search(Request $request)
+    {
+        $post = Post::search($request->get('q'))
+                    ->where('status',1)
+                    ->get();
+
+        return response()->json($post, 200);
+    }
+
 }

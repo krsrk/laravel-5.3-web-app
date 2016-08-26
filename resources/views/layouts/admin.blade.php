@@ -13,6 +13,8 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Styles -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" media="screen,projection" >
+        <link href="https://raw.githubusercontent.com/cesarve77/select2-materialize/master/select2-materialize.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     </head>
     <body id="app-layout">
         <header>
@@ -82,5 +84,51 @@
         <!-- JavaScripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            $(".js-data-example-ajax").select2({
+                  ajax: {
+                    url: "http://localhost:8888/blog/public/search",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                      return {
+                        q: params.term, // search term
+                        page: params.page
+                      };
+                    },
+                    processResults: function (data, params) {
+                      // parse the results into the format expected by Select2
+                      // since we are using custom formatting functions we do not need to
+                      // alter the remote JSON data, except to indicate that infinite
+                      // scrolling can be used
+                      params.page = params.page || 1;
+                      var arr = []
+                      data.forEach(function(dat){
+                        arr.push({
+                            id: dat.id,
+                            text: dat.title,
+                            abstract: dat.abstract,
+                            content: dat.content
+                        });   
+                      });
+                      console.log(arr);
+                      return {
+                        results: arr,
+                        pagination: {
+                          more: (params.page * 30) < data.total_count
+                        }
+                      };
+                    },
+                    cache: true
+                  },
+                  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                  minimumInputLength: 1,
+                });
+        });
+            var $eventSelect = $(".js-data-example-ajax");
+            $eventSelect.on("select2:select", function (e) { console.log(e.params.data.text); });
+        </script>
     </body>
 </html>

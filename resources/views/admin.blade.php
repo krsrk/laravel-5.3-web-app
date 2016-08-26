@@ -10,6 +10,9 @@
         </div>
     </div>
     <div class="row">
+     <select class="browser-default js-data-example-ajax">
+        <option selected="selected">Find Post...</option>
+     </select>   
     <strong>{{{ $message or '' }}}</strong>
     @foreach($data as $dat)  
       <div class="col s12 m6 l12">
@@ -44,6 +47,7 @@
     @endforeach
     </div>
     <script>
+        
         function delPost(id) {
             var conf = confirm("Are you sure to delete this post?");
             if (conf) {

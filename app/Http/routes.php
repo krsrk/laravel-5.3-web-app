@@ -19,6 +19,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/login', ['as' => 'login', 'uses'=>'HomeController@login']);
     Route::post('/login', ['as' => 'login-process', 'uses'=>'HomeController@login']);
     Route::get('/logout', ['as' => 'logout', 'uses'=>'HomeController@logout']);
+    Route::get('/search', ['as' => 'search', 'uses'=>'HomeController@search']);
 });
 
 /////XSS protection and Authentification routes
