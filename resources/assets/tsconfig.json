@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "sourceMap": true
+    },
+    "files": [
+        "typescript/app-module.ts",
+        "typescript/greeter.ts",
+        "typescript/app.ts",
+        "typescript/app-service.ts",
+        "typescript/view-helper.ts",
+        "typescript/jquery.d.ts"
+    ]
+}
